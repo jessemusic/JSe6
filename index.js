@@ -12,15 +12,11 @@ const doOtherThingPromise = () => new Promise((resolve, reject) => {
         resolve('Second data');
     }, 1000);
 });
-//console.log(doSomeThingPromise);
-doSomeThingPromise()
-    .then(data => {
-        console.log(data.split(''));
-        return doOtherThingPromise();
-    })
-    .then(data2 => console.log(data2.split('')))
-    .catch(error => console.log('Ops', error));
 
-//Pending
-//Fulfilled
-//Rejected
+
+Promise.all([doSomeThingPromise(), doOtherThingPromise()]).then(data => {
+    console.log(data[0].split(''));
+    console.log(data[1].split(''));
+}).catch(err => {
+    console.log(err)
+});
