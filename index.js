@@ -4,7 +4,7 @@ const doSomeThingPromise = () => new Promise((resolve, reject) => {
 
         //did something
         resolve('First data');
-    }, 1000);
+    }, 1500);
 });
 const doOtherThingPromise = () => new Promise((resolve, reject) => {
     setTimeout(function() {
@@ -14,9 +14,6 @@ const doOtherThingPromise = () => new Promise((resolve, reject) => {
 });
 
 
-Promise.all([doSomeThingPromise(), doOtherThingPromise()]).then(data => {
-    console.log(data[0].split(''));
-    console.log(data[1].split(''));
-}).catch(err => {
-    console.log(err)
+Promise.race([doSomeThingPromise(), doOtherThingPromise()]).then(data => {
+    console.log(data);
 });
